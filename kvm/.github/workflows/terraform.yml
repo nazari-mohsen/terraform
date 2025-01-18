@@ -1,0 +1,36 @@
+name: Terraform Validate and Fmt
+
+on:
+  pull_request:
+    paths:
+      - '**/*.tf'
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.tf'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.5.0"
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Run terraform fmt with reviewdog
+        run: |
+          terraform fmt -check -recursive | reviewdog -f=checkstyle -name="terraform fmt" -reporter=github-pr-review -level=error
+
+      - name: Run terraform validate with reviewdog
+        run: |
+          terraform validate | reviewdog -f=checkstyle -name="terraform validate" -reporter=github-pr-review -level=error
