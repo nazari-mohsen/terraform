@@ -1,0 +1,10 @@
+cloud_init_file = "./cloudinit/cloud_init.cfg"
+pool_type       = "dir"
+libvirt_url     = "qemu:///system"
+pool_path       = "./kvm"
+source_path     = "path of OS img "
+ssh_key         = "your ssh_key"
+
+vm_definitions = [
+  { type = "master", count = 1, memory = 1024, vcpu = 1, size_disk = 5361393152 } 
+]

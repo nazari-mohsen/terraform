@@ -42,7 +42,7 @@ variable "os_image" {
 variable "source_path" {
   description = "Path to the source configuration for ISO VMs"
   type        = string
-  default     = "noble-server-cloudimg-amd64.img"
+  default     = "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-arm64.img"
 }
 
 variable "vm_definitions" {
