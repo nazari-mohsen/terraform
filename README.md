@@ -83,6 +83,20 @@ After cloning, go into the project directory:
 cd kvm
 ```
 
+#### **Steps to Configure the `terraform.tfvars` File:**
+
+1. Copy the file `terraform.tfvars.sample` from the `sample` directory.
+2. Paste it in the `kvm` directory and rename it as `terraform.tfvars`.
+3. Update the values in the `terraform.tfvars` file to reflect your own configuration (such as paths, SSH keys, VM specifications, etc.).
+
+#### **Default OS Image:**
+
+By default, the OS image used is the `noble-server-cloudimg-arm64.img` image from:
+
+[Ubuntu Cloud Images](https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-arm64.img)
+
+You can download this image and place it in your desired directory. After downloading, update the `source_path` variable in the `terraform.tfvars` file to point to the location where you saved the image.
+
 ### 2. Configure the `terraform.tfvars` File
 
 Once you're in the project directory, create the `terraform.tfvars` file and enter the necessary values to configure your virtual machines.
@@ -169,7 +183,7 @@ This will delete all the virtual machines and resources managed by Terraform.
 ## **Additional Notes**
 
 - **cloud-init**: The `cloud_init.cfg` file is used for initial virtual machine configuration (e.g., networking, users, and other OS-level settings). You can modify this file as per your requirements.
-  
+
 - **Disk Size and Resources**: You can adjust the `memory`, `vcpu`, and `size_disk` values based on your needs. The disk size and resources (CPU/RAM) should be chosen according to the type of virtual machine and the workload it will handle.
 
 - **Number of Machines**: For each machine type (`master`, `worker`, `loadbalancer`), you can specify the desired number of machines. In the example above, we define 3 `master` machines, 2 `worker` machines, and 1 `loadbalancer`.
